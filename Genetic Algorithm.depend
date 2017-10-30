@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1508688072 source:h:\code factory\c++\genetic algorithm\main.cpp
+	<stdio.h>
+	<stdlib.h>
+
