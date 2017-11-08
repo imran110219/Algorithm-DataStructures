@@ -14,7 +14,6 @@ typedef struct Chrom             		// creating the chrom structure
 
 void *evpop(chrom popcurrent[2]);    	//defining the functions that we will use
 int x(chrom popcurrent);
-double y(int x);
 void *pickchroms(chrom popcurrent[2]);
 //void *crossover(chrom popnext[2]);
 //void *mutation(chrom popnext[2]);
@@ -94,17 +93,30 @@ void *evpop(chrom popcurrent[2])               	//takes a pointer to a chrom of 
     for(j=0; j<2; j++)                        // loop of j to choose chromes from [0] to [3]
     {
         popcurrent[j].position[0]=0;
+        int repeat[16] = {0};
         for(i=1; i<16; i++)            			// loop of i to choose the gen of the chrom from  [0] to [5]
         {
             random=rand();               		// creating random value
             random=(random%16);        			// make the random value 0 to 15
-            popcurrent[j].position[i]=random;  		// initialising the bit[i] of chrom[j] with random
+            if(repeat[random] == 0 && random != 0)
+            {
+                popcurrent[j].position[i]=random;
+                repeat[random] = 1;
+            }
+            else
+            {
+                i--;
+            }  		// initialising the bit[i] of chrom[j] with random
+            if(random == 15)
+            {
+                break;
+            }
 
         }   // end of for(i)
 
         value=x(popcurrent[j]);
         popcurrent[j].fit=x(popcurrent[j]);	// calcualte the fitness of chrom[j]
-        printf("\n popcurrent[%d]=%d %d %d %d %d %d %d %d %d %d %d %d    value=%d    fitness = %lf",j,
+        printf("\n popcurrent[%d]=%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d    value=%d    fitness = %d",j,
                popcurrent[j].position[0], popcurrent[j].position[1], popcurrent[j].position[2],
                popcurrent[j].position[3], popcurrent[j].position[4], popcurrent[j].position[5],
                popcurrent[j].position[6], popcurrent[j].position[7], popcurrent[j].position[8],
@@ -125,8 +137,8 @@ int x(chrom popcurrent)        	//x function that evaluate the value of a given 
     {
         p1 = popcurrent.position[i];
         p2 = popcurrent.position[i+1];
-        distancex = (Map[i][1] - Map[i+1][1])^2;
-        distancey = (Map[i][2] - Map[i+1][2])^2;
+        distancex = (Map[p1][1] - Map[p2][1])^2;
+        distancey = (Map[p1][2] - Map[p2][2])^2;
         distance = distance + sqrt(distancex + distancey);
     }
 
@@ -135,7 +147,6 @@ int x(chrom popcurrent)        	//x function that evaluate the value of a given 
 
 void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array of chroms
 {
-
     int i,j;
     chrom temp;                            	//temp chrome to use in sorting
 
@@ -151,7 +162,7 @@ void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array 
     }                // end of for loop
 
     for(i=0; i<2; i++)
-        printf("\nSorting:popnext[%d] fitness=%lf",i,popcurrent[i].fit);   	//printing the result
+        printf("\nSorting:popnext[%d] fitness=%d",i,popcurrent[i].fit);   	//printing the result
     printf("\n");                 //print new line
     //flushall();                                                       //flush the input buffer
     return(0);
