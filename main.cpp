@@ -2,39 +2,61 @@
 #include<conio.h>         		//to use the getche function
 #include<cstdlib>         		//to use the rand function
 #include<cmath>
+#include<vector>
 
 typedef struct Chrom             		// creating the chrom structure
 {
-    short int position_1[6];
-    short int position_2[6];
-    double fit;
+    //short int position[64];
+    int position[16] =  {-1};
+    //short int position_2[6];
+    int fit;
 } chrom;                           	// now we have a chrom type that we can use
 
-void *evpop(chrom popcurrent[4]);    	//defining the functions that we will use
+void *evpop(chrom popcurrent[2]);    	//defining the functions that we will use
 int x(chrom popcurrent);
 double y(int x);
-void *pickchroms(chrom popcurrent[4]);
-void *crossover(chrom popnext[4]);
-void *mutation(chrom popnext[4]);
+void *pickchroms(chrom popcurrent[2]);
+//void *crossover(chrom popnext[2]);
+//void *mutation(chrom popnext[2]);
+
+int Map[16][3] ={
+                        {0, 1, 7},   /*  initializers for row indexed by 0 */
+                        {1, 1, 11},   /*  initializers for row indexed by 1 */
+                        {10, 3, 14},   /*  initializers for row indexed by 2 */
+                        {11, 3, 1},   /*  initializers for row indexed by 3 */
+                        {100, 5, 8},   /*  initializers for row indexed by 4 */
+                        {101, 6, 11},   /*  initializers for row indexed by 5 */
+                        {110, 6, 4},   /*  initializers for row indexed by 6 */
+                        {111, 8, 4},   /*  initializers for row indexed by 7 */
+                        {1000, 10, 1},   /*  initializers for row indexed by 8 */
+                        {1001, 10, 7},   /*  initializers for row indexed by 9 */
+                        {1010, 10, 11},   /*  initializers for row indexed by 10 */
+                        {1011, 11, 14},   /*  initializers for row indexed by 11 */
+                        {1100, 13, 12},   /*  initializers for row indexed by 12 */
+                        {1101, 12, 2},   /*  initializers for row indexed by 13 */
+                        {1110, 14, 3},   /*  initializers for row indexed by 14 */
+                        {1111, 14, 8},   /*  initializers for row indexed by 15 */
+                    };
 
 int main()								// the main function
 {
-    short int start[6] = {0,0,0,0,0,0};         // start point (0, 0)
-    short int goal[6] = {1,1,1,1,1,1};          // end point (7, 7)
-    vector< vector<data> > Map;
+    short int start[4] = {0,0,0,0};         // start point (0, 0)
+    short int goal[4] = {1,1,1,1};          // end point (7, 7)
+
+    //vector<vector<int>> Map;
 
     int num;								// num is the no. of iterations
     int i,j;
 
-    printf("\nWelcome to the Genetic Algorithm coded by Loay Al Lusi:http://www.linkedin.com/in/loayallusi in May 2005 \nThe Algorithm is based on the function y = -x^2 + 5 to find the maximum value of the function...\n"); // introduction to the program
+    printf("\nWelcome to the Genetic Algorithm coded by Sadman Sobhan:https://github.com/imran110219/Genetic-Algorithm \nThe Algorithm is based on the function y = -x^2 + 5 to find the maximum value of the function...\n"); // introduction to the program
 
 
 enter:
     printf("\nPlease enter the no. of iterations:  ");
     scanf("%d",&num);             	// enter the no. of iterations in num
 
-    chrom popcurrent[4];                        	// we make 4 chromes of popcurrent
-    chrom popnext[4];                           	// we make 4 chromes of popnext
+    chrom popcurrent[2];                        	// we make 2 chromes of popcurrent
+    chrom popnext[2];                           	// we make 2 chromes of popnext
 
     if(num<1)                               	// if a -ve number is inserted .. enter num again
         goto enter;
@@ -45,14 +67,14 @@ enter:
     {
         printf("\ni = %d\n",i);        	// print the iteration number
 
-        for(j=0; j<4; j++)
+        for(j=0; j<2; j++)
             popnext[j]=popcurrent[j];            	//copy popcurrent to popnext in order to adjust it
 
         pickchroms(popnext);                    	//pick best chromes
-        crossover(popnext);                      	//cross over to get children chromes
-        mutation(popnext);                       	//mutate with a low probability
+        //crossover(popnext);                      	//cross over to get children chromes
+        //mutation(popnext);                       	//mutate with a low probability
 
-        for(j=0; j<4; j++)
+        for(j=0; j<2; j++)
             popcurrent[j]=popnext[j];             	//copy the chromes of popnext to popcurrent
 
     }                                           // loop back until no. of iterations is exceeded
@@ -65,32 +87,30 @@ enter:
 }                                            	//end of main
 
 
-
-void *evpop(chrom popcurrent[4])               	//takes a pointer to a chrom of 4 elements
+void *evpop(chrom popcurrent[2])               	//takes a pointer to a chrom of 2 elements
 {
     int i,j,value;
     int random;
-    for(j=0; j<4; j++)                        // loop of j to choose chromes from [0] to [3]
+    for(j=0; j<2; j++)                        // loop of j to choose chromes from [0] to [3]
     {
-        for(i=0; i<6; i++)            			// loop of i to choose the gen of the chrom from  [0] to [5]
-
+        popcurrent[j].position[0]=0;
+        for(i=1; i<16; i++)            			// loop of i to choose the gen of the chrom from  [0] to [5]
         {
             random=rand();               		// creating random value
-            random=(random%2);        			// make the random value o or 1 only
-            popcurrent[j].position_1[i]=random;  		// initialising the bit[i] of chrom[j] with random
-            random=rand();               		// creating random value
-            random=(random%2);        			// make the random value o or 1 only
-            popcurrent[j].position_2[i]=random;  		// initialising the bit[i] of chrom[j] with random
+            random=(random%16);        			// make the random value 0 to 15
+            popcurrent[j].position[i]=random;  		// initialising the bit[i] of chrom[j] with random
+
         }   // end of for(i)
 
         value=x(popcurrent[j]);
-        popcurrent[j].fit=y(x(popcurrent[j]));	// calcualte the fitness of chrom[j]
-        printf("\n popcurrent[%d]=%d%d%d %d%d%d %d%d%d %d%d%d    value=%d    fitness = %lf",j,
-               popcurrent[j].position_1[5], popcurrent[j].position_1[4], popcurrent[j].position_1[3],
-               popcurrent[j].position_1[2], popcurrent[j].position_1[1], popcurrent[j].position_1[0],
-               popcurrent[j].position_2[5], popcurrent[j].position_2[4], popcurrent[j].position_2[3],
-               popcurrent[j].position_2[2], popcurrent[j].position_2[1], popcurrent[j].position_2[0],
-               value, popcurrent[j].fit);     // print the chrom[j]
+        popcurrent[j].fit=x(popcurrent[j]);	// calcualte the fitness of chrom[j]
+        printf("\n popcurrent[%d]=%d %d %d %d %d %d %d %d %d %d %d %d    value=%d    fitness = %lf",j,
+               popcurrent[j].position[0], popcurrent[j].position[1], popcurrent[j].position[2],
+               popcurrent[j].position[3], popcurrent[j].position[4], popcurrent[j].position[5],
+               popcurrent[j].position[6], popcurrent[j].position[7], popcurrent[j].position[8],
+               popcurrent[j].position[9], popcurrent[j].position[10], popcurrent[j].position[11],
+               popcurrent[j].position[12], popcurrent[j].position[13], popcurrent[j].position[14],
+               popcurrent[j].position[15], value, popcurrent[j].fit);     // print the chrom[j]
 
     }    // end of for(j)
 
@@ -100,53 +120,44 @@ void *evpop(chrom popcurrent[4])               	//takes a pointer to a chrom of 
 
 int x(chrom popcurrent)        	//x function that evaluate the value of a given chrom
 {
-    int x1, y1, x2, y2;
-    x1 = (popcurrent.position_1[3]*1)+(popcurrent.position_1[4]*2)+(popcurrent.position_1[5]*4);
-    y1 = (popcurrent.position_1[0]*1)+(popcurrent.position_1[1]*2)+(popcurrent.position_1[2]*4);
-    x2 = (popcurrent.position_2[3]*1)+(popcurrent.position_2[4]*2)+(popcurrent.position_2[5]*4);
-    y2 = (popcurrent.position_2[0]*1)+(popcurrent.position_2[1]*2)+(popcurrent.position_2[2]*4);
-    int distancex = (x2 - x1)^2;
-    int distancey = (y2 - y1)^2;                  	// z=sum of the ( bits * their weights) with the sign value
-    int calcdistance = distancex + distancey;
-    return calcdistance;                	//return the value of z
-}                             	// end x function
+    int p1, p2, distancex, distancey, distance = 0;
+    for(int i=0; i<15; i++)
+    {
+        p1 = popcurrent.position[i];
+        p2 = popcurrent.position[i+1];
+        distancex = (Map[i][1] - Map[i+1][1])^2;
+        distancey = (Map[i][2] - Map[i+1][2])^2;
+        distance = distance + sqrt(distancex + distancey);
+    }
 
-double y(int x)          		// the y function that we look for it's maximum value takes x value
-{          	// the function is y= - ( x^ 2 ) +5
-    //int distancex = (x2 - x1)^2;
-    //int distancey = (y2 - y1)^2;
+    return distance;
+}                             	// end x function                            	// end of y function
 
-    double calcdistance = sqrt(x);
-    //calcdistance = 1.0/calcdistance;
-    return (calcdistance);
-}                             	// end of y function
-
-void *pickchroms(chrom popcurrent[4])   	// pickchroms takes a pointer to array of chroms
+void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array of chroms
 {
 
     int i,j;
     chrom temp;                            	//temp chrome to use in sorting
 
-    for(i=0; i<3; i++)               		//sorting the given set due to fitness
-        for(j=0; j<3; j++)
+    for(i=0; i<2; i++)               		//sorting the given set due to fitness
+    {
+        if(popcurrent[i+1].fit>popcurrent[i].fit)
         {
-            if(popcurrent[j+1].fit>popcurrent[j].fit)
-            {
-                temp=popcurrent[j+1];
-                popcurrent[j+1]=popcurrent[j];
-                popcurrent[j]=temp;
+            temp=popcurrent[i+1];
+            popcurrent[i+1]=popcurrent[i];
+            popcurrent[i]=temp;
 
-            }   // end of if
-        }                // end of for loop
+        }   // end of if
+    }                // end of for loop
 
-    for(i=0; i<4; i++)
+    for(i=0; i<2; i++)
         printf("\nSorting:popnext[%d] fitness=%lf",i,popcurrent[i].fit);   	//printing the result
     printf("\n");                 //print new line
     //flushall();                                                       //flush the input buffer
     return(0);
 }                       //end of pick chromes function
 
-void *crossover(chrom popnext[4]) // crossover function takes a pointer to array of chromes
+/*void *crossover(chrom popnext[2]) // crossover function takes a pointer to array of chromes
 {
     int random;
     int i;
@@ -181,9 +192,9 @@ void *crossover(chrom popnext[4]) // crossover function takes a pointer to array
     // printing the bits, value and fitness for the chromes of the new set
 
     return(0);
-}                  // end crossover function
+}                  // end crossover function*/
 
-void *mutation(chrom popnext[4])   // mutation funtion given a pointer to array of chromes
+/*void *mutation(chrom popnext[4])   // mutation funtion given a pointer to array of chromes
 {
 
     int random;
@@ -219,4 +230,4 @@ void *mutation(chrom popnext[4])   // mutation funtion given a pointer to array 
     }         	// end of if
 
     return(0);
-}                       //end of mutation
+}                       //end of mutation*/
