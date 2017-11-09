@@ -1,5 +1,4 @@
 #include<cstdio>	//to use the printf function
-#include<conio.h>         		//to use the getche function
 #include<cstdlib>         		//to use the rand function
 #include<cmath>
 #include<vector>
@@ -114,15 +113,14 @@ void *evpop(chrom popcurrent[2])               	//takes a pointer to a chrom of 
 
         }   // end of for(i)
 
-        value=x(popcurrent[j]);
         popcurrent[j].fit=x(popcurrent[j]);	// calcualte the fitness of chrom[j]
-        printf("\n popcurrent[%d]=%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d    value=%d    fitness = %d",j,
+        printf("\n popcurrent[%d]=%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d    fitness = %d",j,
                popcurrent[j].position[0], popcurrent[j].position[1], popcurrent[j].position[2],
                popcurrent[j].position[3], popcurrent[j].position[4], popcurrent[j].position[5],
                popcurrent[j].position[6], popcurrent[j].position[7], popcurrent[j].position[8],
                popcurrent[j].position[9], popcurrent[j].position[10], popcurrent[j].position[11],
                popcurrent[j].position[12], popcurrent[j].position[13], popcurrent[j].position[14],
-               popcurrent[j].position[15], value, popcurrent[j].fit);     // print the chrom[j]
+               popcurrent[j].position[15], popcurrent[j].fit);     // print the chrom[j]
 
     }    // end of for(j)
 
@@ -137,8 +135,8 @@ int x(chrom popcurrent)        	//x function that evaluate the value of a given 
     {
         p1 = popcurrent.position[i];
         p2 = popcurrent.position[i+1];
-        distancex = (Map[p1][1] - Map[p2][1])^2;
-        distancey = (Map[p1][2] - Map[p2][2])^2;
+        distancex = pow((Map[p1][1] - Map[p2][1]), 2);
+        distancey = pow((Map[p1][2] - Map[p2][2]), 2);
         distance = distance + sqrt(distancex + distancey);
     }
 
@@ -152,7 +150,7 @@ void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array 
 
     for(i=0; i<2; i++)               		//sorting the given set due to fitness
     {
-        if(popcurrent[i+1].fit>popcurrent[i].fit)
+        if(popcurrent[i+1].fit<popcurrent[i].fit)
         {
             temp=popcurrent[i+1];
             popcurrent[i+1]=popcurrent[i];
