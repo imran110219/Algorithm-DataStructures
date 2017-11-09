@@ -38,8 +38,8 @@ int Map[16][3] ={
 
 int main()								// the main function
 {
-    short int start[4] = {0,0,0,0};         // start point (0, 0)
-    short int goal[4] = {1,1,1,1};          // end point (7, 7)
+    short int start = 0;         // start point (0, 0)
+    short int goal = 15;          // end point (7, 7)
 
     //vector<vector<int>> Map;
 
@@ -87,7 +87,7 @@ enter:
 
 void *evpop(chrom popcurrent[2])               	//takes a pointer to a chrom of 2 elements
 {
-    int i,j,value;
+    int i,j;
     int random;
     for(j=0; j<2; j++)                        // loop of j to choose chromes from [0] to [3]
     {
@@ -145,7 +145,7 @@ int x(chrom popcurrent)        	//x function that evaluate the value of a given 
 
 void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array of chroms
 {
-    int i,j;
+    int i;
     chrom temp;                            	//temp chrome to use in sorting
 
     for(i=0; i<2; i++)               		//sorting the given set due to fitness
@@ -207,7 +207,7 @@ void *mutation(chrom popnext[2])   // mutation funtion given a pointer to array 
 {
     printf("Mutation\n");
     int random;
-    int row,col,value;
+    int row,col;
     random=rand()%50;                  //random value is between ( 0 - 49 )
 
     if (random==25)    // Suppusiong Probability of mutation is 2 %
