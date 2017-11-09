@@ -46,7 +46,7 @@ int main()								// the main function
     int num;								// num is the no. of iterations
     int i,j;
 
-    printf("\nWelcome to the Genetic Algorithm coded by Sadman Sobhan:https://github.com/imran110219/Genetic-Algorithm \nThe Algorithm is based on the function y = -x^2 + 5 to find the maximum value of the function...\n"); // introduction to the program
+    printf("\nWelcome to the Genetic Algorithm coded by Sadman Sobhan:https://github.com/imran110219/Genetic-Algorithm \nThe Algorithm is based on the function d = sqrt(x^2 + y^2) to find the maximum value of the function...\n"); // introduction to the program
 
 
 enter:
@@ -203,40 +203,37 @@ void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array 
     return(0);
 }                  // end crossover function*/
 
-/*void *mutation(chrom popnext[4])   // mutation funtion given a pointer to array of chromes
+void *mutation(chrom popnext[2])   // mutation funtion given a pointer to array of chromes
 {
-
+    printf("Mutation\n");
     int random;
     int row,col,value;
     random=rand()%50;                  //random value is between ( 0 - 49 )
 
     if (random==25)    // Suppusiong Probability of mutation is 2 %
     {
-        col=rand()%6;                           	// random column (gene) choosing
-        row=rand()%4;                           	// random row ( chrome ) choosing
+        col=rand()%16;                           	// random column (gene) choosing
+        row=rand()%2;                           	// random row ( chrome ) choosing
 
-        if (popnext[row].position_1[col]==0)          	// invert the bit to 1 if it was 0
-            popnext[row].position_1[col]=1 ;
+        if (popnext[row].position[col]!=0 && popnext[row].position[col]!=15)          	// invert the bit to 0 if it was 1
+        {
+            if(popnext[row].position[col]%2 == 0)                                     // if even it increases value
+                popnext[row].position[col]++;
+            else                                                                        // if odd it decreases value
+                popnext[row].position[col]--;
+        }
 
-        else if (popnext[row].position_1[col]==1)       	// invert the bit to 0 if it was 1
-            popnext[row].position_1[col]=0;
+        popnext[row].fit=x(popnext[row]);   	// calculate the fitness for the mutated chrome
 
-        if (popnext[row].position_2[col]==0)          	// invert the bit to 1 if it was 0
-            popnext[row].position_2[col]=1 ;
-
-        else if (popnext[row].position_2[col]==1)       	// invert the bit to 0 if it was 1
-            popnext[row].position_2[col]=0;
-
-        popnext[row].fit=y(x(popnext[row]));   	// calculate the fitness for the mutated chrome
-        value=x(popnext[row]);
-        printf("\nMutation occured in popnext[%d] bit[%d]:=%d%d%d %d%d%d %d%d%d %d%d%d    value=%d fitness=%lf",
+        printf("\nMutation occured in popnext[%d] bit[%d]:=%d%d%d %d%d%d %d%d%d %d%d%d    fitness=%d",
                row,col,
-               popnext[row].position_1[5],popnext[row].position_1[4],popnext[row].position_1[3], popnext[row].position_1[2],popnext[row].position_1[1],popnext[row].position_1[0],
-               popnext[row].position_2[5],popnext[row].position_2[4],popnext[row].position_2[3], popnext[row].position_2[2],popnext[row].position_2[1],popnext[row].position_2[0],
-               value,popnext[row].fit);
+               popnext[row].position[0],popnext[row].position[1],popnext[row].position[2], popnext[row].position[3],popnext[row].position[4],popnext[row].position[5],
+               popnext[row].position[6],popnext[row].position[7],popnext[row].position[8], popnext[row].position[9],popnext[row].position[10],popnext[row].position[11],
+               popnext[row].position[12],popnext[row].position[13],popnext[row].position[14], popnext[row].position[15],
+               popnext[row].fit);
 
         // print the chrome index,bits,value, fintness of the mutated chrome
     }         	// end of if
 
     return(0);
-}                       //end of mutation*/
+}                       //end of mutation
