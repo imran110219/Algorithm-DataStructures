@@ -166,42 +166,37 @@ void *pickchroms(chrom popcurrent[2])   	// pickchroms takes a pointer to array 
     return(0);
 }                       //end of pick chromes function
 
-/*void *crossover(chrom popnext[2]) // crossover function takes a pointer to array of chromes
+void *crossover(chrom popnext[2]) // crossover function takes a pointer to array of chromes
 {
     int random;
     int i;
     random=rand();                                  	//random cross over point
-    random=((random%5)+1);                    		// cross point should be between (1 - 5)
+    random=((random%15)+1);                    		// cross point should be between (1 - 5)
     for(i=0; i<random; i++)                     	//crossing the bits below the cross point index
     {
-        popnext[2].position_1[i]=popnext[0].position_1[i];        	//child 1 cross over
-        popnext[3].position_1[i]=popnext[1].position_1[i];     	// child 2 cross over
+        popnext[0].position[i]=popnext[1].position[i];        	//child 1 cross over
 
-        popnext[2].position_2[i]=popnext[0].position_2[i];        	//child 1 cross over
-        popnext[3].position_2[i]=popnext[1].position_2[i];
     } // end of for
 
-    for(i=random; i<6; i++)                        	// crossing the bits beyond the cross point index
+    for(i=random; i<16; i++)                        	// crossing the bits beyond the cross point index
     {
-        popnext[2].position_1[i]=popnext[1].position_1[i];     	// child 1 cross over
-        popnext[3].position_1[i]=popnext[0].position_1[i];       	// chlid 2 cross over
+        popnext[1].position[i]=popnext[0].position[i];     	// child 1 cross over
 
-        popnext[2].position_2[i]=popnext[1].position_2[i];     	// child 1 cross over
-        popnext[3].position_2[i]=popnext[0].position_2[i];
     }    // end of for
 
-    for(i=0; i<4; i++)
-        popnext[i].fit=y(x(popnext[i]));     	// calculating the fitness values for the new set
+    for(i=0; i<2; i++)
+        popnext[i].fit=x(popnext[i]);     	// calculating the fitness values for the new set
 
-    for(i=0; i<4; i++)
-        printf("\nCrossOver popnext[%d]=%d%d%d %d%d%d %d%d%d %d%d%d    value=%d    fitness = %lf",i,
-               popnext[i].position_1[5],popnext[i].position_1[4],popnext[i].position_1[3],popnext[i].position_1[2],popnext[i].position_1[1],popnext[i].position_1[0],
-               popnext[i].position_2[5],popnext[i].position_2[4],popnext[i].position_2[3],popnext[i].position_2[2],popnext[i].position_2[1],popnext[i].position_2[0],
-               x(popnext[i]),popnext[i].fit);
+    for(i=0; i<2; i++)
+        printf("\nCrossOver popnext[%d]=%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d    fitness = %lf",i,
+               popnext[i].position[0],popnext[i].position[1],popnext[i].position[2],popnext[i].position[3],popnext[i].position[4],popnext[i].position[5],
+               popnext[i].position[6],popnext[i].position[7],popnext[i].position[8],popnext[i].position[9],popnext[i].position[10],popnext[i].position[11],
+               popnext[i].position[12],popnext[i].position[13],popnext[i].position[14],popnext[i].position[15],
+               popnext[i].fit);
     // printing the bits, value and fitness for the chromes of the new set
 
     return(0);
-}                  // end crossover function*/
+}                  // end crossover function
 
 void *mutation(chrom popnext[2])   // mutation funtion given a pointer to array of chromes
 {
@@ -225,7 +220,7 @@ void *mutation(chrom popnext[2])   // mutation funtion given a pointer to array 
 
         popnext[row].fit=x(popnext[row]);   	// calculate the fitness for the mutated chrome
 
-        printf("\nMutation occured in popnext[%d] bit[%d]:=%d%d%d %d%d%d %d%d%d %d%d%d    fitness=%d",
+        printf("\nMutation occured in popnext[%d] bit[%d]:=%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d    fitness=%d",
                row,col,
                popnext[row].position[0],popnext[row].position[1],popnext[row].position[2], popnext[row].position[3],popnext[row].position[4],popnext[row].position[5],
                popnext[row].position[6],popnext[row].position[7],popnext[row].position[8], popnext[row].position[9],popnext[row].position[10],popnext[row].position[11],
