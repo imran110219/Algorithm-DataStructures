@@ -42,6 +42,21 @@ public class DoublyLinkedList {
         temp.next = node;
     }
 
+    public void insertLast(int newData){
+        Node node = new Node(newData);
+        if(head == null)
+            head = node;
+        else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            node.prev = temp;
+            node.next = null;
+            temp.next = node;
+        }
+    }
+
     public void printList(){
         while(head != null){
             System.out.print(head.data+ " ");
@@ -51,11 +66,12 @@ public class DoublyLinkedList {
 
     public static void main(String[] args){
         DoublyLinkedList list = new DoublyLinkedList();
-//        list.insertLast(1);
+        list.insertLast(2);
 //        list.insertLast(3);
 //        list.insertLast(4);
 //        list.insertLast(5);
 //        list.insertByPosition(2,2);
+        list.insertFirst(1);
         list.insertFirst(0);
 //
 //        list.deleteByKey(0);
