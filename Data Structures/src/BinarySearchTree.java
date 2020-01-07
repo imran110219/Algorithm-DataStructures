@@ -1,23 +1,25 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.io.*;
 
 /**
  * Created by Imran on 1/6/2020.
  */
-class Node {
-    int data;
-    Node left;
-    Node right;
-
-    Node(int data) {
-        this.data = data;
-        right = null;
-        left = null;
-    }
-}
 
 public class BinarySearchTree {
+
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int data) {
+            this.data = data;
+            right = null;
+            left = null;
+        }
+    }
 
     public static Node insert(Node root, int data) {
         if(root == null) {
@@ -59,24 +61,24 @@ public class BinarySearchTree {
         System.out.print(root.data+ " ");
     }
 
-//    public static void levelOrder(Node root) {
-//        Queue<Node> queue = new ArrayList<>();
-//        if(root == null)
-//            return;
-//        else {
-//            queue.add(root);
-//            while(!queue.isEmpty()){
-//                Node temp = queue.remove();
-//                System.out.print(temp.data+" ");
-//                if(temp.left != null){
-//                    queue.add(temp.left);
-//                }
-//                if(temp.right != null){
-//                    queue.add(temp.right);
-//                }
-//            }
-//        }
-//    }
+    public static void levelOrder(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        if(root == null)
+            return;
+        else {
+            queue.add(root);
+            while(!queue.isEmpty()){
+                Node temp = queue.remove();
+                System.out.print(temp.data+" ");
+                if(temp.left != null){
+                    queue.add(temp.left);
+                }
+                if(temp.right != null){
+                    queue.add(temp.right);
+                }
+            }
+        }
+    }
 
     public static int height(Node root) {
         if(root == null)
@@ -94,8 +96,14 @@ public class BinarySearchTree {
         }
         scan.close();
         inOrder(root);
+        System.out.println();
         preOrder(root);
+        System.out.println();
         postOrder(root);
-//        levelOrder(root);
+        System.out.println();
+        levelOrder(root);
+        System.out.println();
+        System.out.println(height(root));
+
     }
 }
