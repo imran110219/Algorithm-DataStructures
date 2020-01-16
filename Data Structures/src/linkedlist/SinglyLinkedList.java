@@ -1,7 +1,9 @@
+package linkedlist;
+
 /**
  * Created by Imran on 12/17/2019.
  */
-public class LinkedList {
+public class SinglyLinkedList {
 
     class Node {
         int data;
@@ -99,7 +101,7 @@ public class LinkedList {
     }
 
     public static void main(String[] args){
-        LinkedList list = new LinkedList();
+        SinglyLinkedList list = new SinglyLinkedList();
         list.insertLast(1);
         list.insertLast(3);
         list.insertLast(4);

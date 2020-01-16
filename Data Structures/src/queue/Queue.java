@@ -1,3 +1,5 @@
+package queue;
+
 /**
  * Created by Imran on 1/2/2020.
  */
