@@ -11,6 +11,8 @@ public class AlgorithmComplexity {
             return "O(n)";
         else if(Math.pow(2,execution) == number)
             return "O(logn)";
+        else if(Math.pow(number,2) == execution)
+            return "O(n^2)";
         return "";
     }
 }
