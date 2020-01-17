@@ -1,5 +1,7 @@
 package array;
 
+import complexity.AlgorithmComplexity;
+
 import java.util.Scanner;
 
 /**
@@ -13,8 +15,13 @@ public class Array {
         for(int i=0; i<a.length; i++){
             a[i] = input.nextInt();
         }
+        int  counter = 0;
         for(int i=0; i<a.length; i++){
             System.out.print(a[i]+ " ");
+            counter++;
         }
+        System.out.println();
+        System.out.println("The Complexity of this program is "+ AlgorithmComplexity.checkComplexity(counter, size));
+
     }
 }
