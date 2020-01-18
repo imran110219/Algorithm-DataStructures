@@ -2,6 +2,7 @@ package array;
 
 import complexity.AlgorithmComplexity;
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -17,8 +18,9 @@ public class OneDimensionArray {
         int size=0;
         if(inputType.equalsIgnoreCase("file")){
 
-            String fileName = input.nextLine();
-            String prefix = "H:/Code Factory/Algorithm-DataStructures/Data Structures/src/array/";
+//            String fileName = input.nextLine();
+            String prefix = "H:/Code Factory/Algorithm-DataStructures/Data Structures/in/";
+            String fileName = "1D";
             String postfix = ".txt";
             Scanner fileInput = new Scanner(new File(prefix+fileName+postfix));
             size = fileInput.nextInt();
@@ -27,11 +29,19 @@ public class OneDimensionArray {
                 a[i] = fileInput.nextInt();
             }
         }
-        else {
+        else if(inputType.equalsIgnoreCase("console")){
             size = input.nextInt();
             a = new int[size];
             for (int i = 0; i < a.length; i++) {
                 a[i] = input.nextInt();
+            }
+        }
+        else if(inputType.equalsIgnoreCase("random")){
+            Random rand = new Random();
+            size = rand.nextInt(50);
+            a = new int[size];
+            for (int i = 0; i < a.length; i++) {
+                a[i] = rand.nextInt(50);
             }
         }
         int  counter = 0;
