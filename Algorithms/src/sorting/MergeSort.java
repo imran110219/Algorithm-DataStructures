@@ -5,11 +5,11 @@ package sorting;
  */
 public class MergeSort {
 
-    private void merge(int[] left, int[] right, int[] arr) {
+    private void merge(int[] left, int[] right, int[] arr, int lCount, int rCount) {
         int i = 0;
         int j = 0;
         int k = 0;
-        while(i < left.length && j < right.length){
+        while(i < lCount && j < rCount){
             if(left[i] <= right[j]){
                 arr[k] = left[i];
                 i++;
@@ -21,21 +21,20 @@ public class MergeSort {
             k++;
         }
 
-        while (i < left.length) {
+        while (i < lCount) {
             arr[k] = left[i];
             i++;
             k++;
         }
 
-        while (j < right.length) {
+        while (j < rCount) {
             arr[k] = right[j];
             j++;
             k++;
         }
     }
 
-    public void mergeSort(int[] arr) {
-        int size = arr.length;
+    public void mergeSort(int[] arr, int size) {
         if(size<2)
             return;
         int mid = size/2;
@@ -45,9 +44,9 @@ public class MergeSort {
             left[i] = arr[i];
         for(int j=mid; j<right.length; j++)
             left[j-mid] = arr[j];
-        mergeSort(left);
-        mergeSort(right);
-        merge(left, right, arr);
+        mergeSort(left, mid);
+        mergeSort(right, size-mid);
+        merge(left, right, arr, mid, size-mid);
     }
 
     public void printArray(int arr[])
@@ -61,7 +60,7 @@ public class MergeSort {
     public static void main(String[] args) {
         MergeSort mergeSort = new MergeSort();
         int array []= {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        mergeSort.mergeSort(array);
+        mergeSort.mergeSort(array, array.length);
         mergeSort.printArray(array);
     }
 
