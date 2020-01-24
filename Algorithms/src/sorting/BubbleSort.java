@@ -4,7 +4,7 @@ package sorting;
  * Created by Imran on 1/5/2020.
  */
 public class BubbleSort {
-    public void bubbleSort(int arr[]){
+    public static void bubbleSort(int arr[]){
         int len = arr.length;
         for(int i=0; i<len-1; i++)
             for(int j=0; j<len-i-1; j++) {
