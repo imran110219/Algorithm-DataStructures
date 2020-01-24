@@ -5,7 +5,7 @@ package sorting;
  */
 public class MergeSort {
 
-    private void merge(int[] left, int[] right, int[] arr) {
+    private static void merge(int[] left, int[] right, int[] arr) {
         int i = 0;
         int j = 0;
         int k = 0;
@@ -36,7 +36,7 @@ public class MergeSort {
         }
     }
 
-    public void mergeSort(int[] arr) {
+    public static void mergeSort(int[] arr) {
         int size = arr.length;
         if(size<2)
             return;
