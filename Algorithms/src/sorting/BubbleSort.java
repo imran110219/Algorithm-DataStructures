@@ -1,5 +1,7 @@
 package sorting;
 
+import java.util.Collections;
+
 /**
  * Created by Imran on 1/5/2020.
  */
@@ -9,11 +11,15 @@ public class BubbleSort {
         for(int i=0; i<len-1; i++)
             for(int j=0; j<len-i-1; j++) {
                 if(arr[j] > arr[j+1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    swap(arr, j,j+1);
                 }
             }
+    }
+
+    public static void swap(int[] arr, int index1, int index2){
+        int temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
     }
 
     public void printArray(int arr[])
