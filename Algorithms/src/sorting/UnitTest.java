@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 /**
  * Created by Imran on 1/24/2020.
  */
-public class TestSort {
+public class UnitTest {
     @Test
     public void mergeTest() {
         int[] actual = { 5, 1, 6, 2, 3, 4 };
