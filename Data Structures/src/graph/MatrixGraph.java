@@ -3,11 +3,11 @@ package graph;
 /**
  * Created by Imran on 1/11/2020.
  */
-public class Graph {
+public class MatrixGraph {
     private boolean adjMatrix[][];
     private int numVertices;
 
-    public Graph(int numVertices){
+    public MatrixGraph(int numVertices){
         this.numVertices = numVertices;
         adjMatrix = new boolean[numVertices][numVertices];
     }
@@ -40,14 +40,14 @@ public class Graph {
 
     public static void main(String args[])
     {
-        Graph g = new Graph(4);
+        MatrixGraph mg = new MatrixGraph(4);
 
-        g.addEdge(0, 1);
-        g.addEdge(0, 2);
-        g.addEdge(1, 2);
-        g.addEdge(2, 0);
-        g.addEdge(2, 3);
+        mg.addEdge(0, 1);
+        mg.addEdge(0, 2);
+        mg.addEdge(1, 2);
+        mg.addEdge(2, 0);
+        mg.addEdge(2, 3);
 
-        System.out.print(g.toString());
+        System.out.print(mg.toString());
     }
 }
