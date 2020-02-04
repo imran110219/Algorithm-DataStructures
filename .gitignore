@@ -29,9 +29,9 @@
 # Executables
 *.exe
 *.app
-*.class
+# *.class
 
 # IntellIJ IDEA
 .idea/
 *.iml
-out/
+# out/
