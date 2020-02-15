@@ -1,4 +1,4 @@
-package greedymethod;
+package dynamicprogramming;
 
 /**
  * Created by Imran on 2/14/2020.
@@ -16,6 +16,7 @@ public class Knapsack {
         this.capacityOfKnapsack = capacityOfKnapsack;
         this.weights = weights;
         this.values = values;
+        this.knapsackTable = new int[numOfItems+1][capacityOfKnapsack+1];
     }
 
     public void solve() {
@@ -25,7 +26,7 @@ public class Knapsack {
                 int notTakingItem = knapsackTable[i-1][w];
                 int takingItem = 0;
                 if(weights[i] <= w) {
-                    takingItem = knapsackTable[i-1][w-weights[i]];
+                    takingItem = values[i] + knapsackTable[i-1][w-weights[i]];
                 }
                 knapsackTable[i][w] = Math.max(notTakingItem, takingItem);
             }
