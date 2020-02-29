@@ -3,7 +3,7 @@ package complexity;
 /**
  * Created by Imran on 1/17/2020.
  */
-public class AlgorithmComplexity {
+public class TimeComplexity {
     public static String checkComplexity(int execution, int number){
         if(execution == 1)
             return "O(1)";

@@ -1,6 +1,6 @@
 package array;
 
-import complexity.AlgorithmComplexity;
+import complexity.TimeComplexity;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -50,6 +50,6 @@ public class OneDimensionArray {
             counter++;
         }
         System.out.println();
-        System.out.println("The Complexity of this program is "+ AlgorithmComplexity.checkComplexity(counter, size));
+        System.out.println("The Complexity of this program is "+ TimeComplexity.checkComplexity(counter, size));
     }
 }
