@@ -1,12 +1,14 @@
 package sorting;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Created by Imran on 1/24/2020.
  */
 public class UnitTest {
+
     @Test
     public void mergeTest() {
         int[] actual = { 5, 1, 6, 2, 3, 4 };
