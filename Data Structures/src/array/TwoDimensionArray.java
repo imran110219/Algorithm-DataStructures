@@ -18,7 +18,7 @@ public class TwoDimensionArray {
         int size = 0;
         int a[][]=new int[size][size];
         if(inputType.equalsIgnoreCase("file")){
-            String prefix = "H:/Code Factory/Algorithm-DataStructures/Data Structures/in/";
+            String prefix = "./in/";
             String fileName = "2D";
             String postfix = ".txt";
             Scanner fileInput = new Scanner(new File(prefix+fileName+postfix));

@@ -19,7 +19,7 @@ public class OneDimensionArray {
         if(inputType.equalsIgnoreCase("file")){
 
 //            String fileName = input.nextLine();
-            String prefix = "H:/Code Factory/Algorithm-DataStructures/Data Structures/in/";
+            String prefix = "./in/";
             String fileName = "1D";
             String postfix = ".txt";
             Scanner fileInput = new Scanner(new File(prefix+fileName+postfix));
