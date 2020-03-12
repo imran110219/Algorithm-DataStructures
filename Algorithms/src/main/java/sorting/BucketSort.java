@@ -8,14 +8,14 @@ import java.util.Arrays;
 public class BucketSort {
 
 
-    public static void bucketSort(int[] array, int size) {
+    public static void sort(int[] array) {
         int max = getMax(array);
         int[] bucket = new int[max + 1];
         for (int i = 0; i <= max; i++) {
             bucket[i] = 0;
         }
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < array.length; i++) {
             bucket[array[i]]++;
         }
 
@@ -47,7 +47,7 @@ public class BucketSort {
         int[] data = { 4, 3, 4, 5, 6, 9, 1, 5 };
         int size = data.length;
         BucketSort bucketSort = new BucketSort();
-        bucketSort.bucketSort(data, size);
+        bucketSort.sort(data);
         bucketSort.printArray(data);
         System.out.println("Sorted Array in Ascending Order: " + Arrays.toString(data));
     }

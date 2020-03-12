@@ -4,7 +4,7 @@ package sorting;
  * Created by Imran on 1/18/2020.
  */
 public class SelectionSort {
-    public void selectionSort(int arr[]){
+    public static void sort(int arr[]){
         int len = arr.length;
         for(int i=0; i<len-1; i++){
             int minIndex = i;
@@ -29,7 +29,7 @@ public class SelectionSort {
     public static void main(String[] args) {
         SelectionSort selectionSort = new SelectionSort();
         int array []= {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        selectionSort.selectionSort(array);
+        selectionSort.sort(array);
         selectionSort.printArray(array);
     }
 }

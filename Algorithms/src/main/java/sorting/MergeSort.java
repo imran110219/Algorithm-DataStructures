@@ -36,7 +36,7 @@ public class MergeSort {
         }
     }
 
-    public static void mergeSort(int[] arr) {
+    public static void sort(int[] arr) {
         int size = arr.length;
         if(size<2)
             return;
@@ -47,8 +47,8 @@ public class MergeSort {
             left[i] = arr[i];
         for(int j=mid; j<size; j++)
             right[j-mid] = arr[j];
-        mergeSort(left);
-        mergeSort(right);
+        sort(left);
+        sort(right);
 
         merge(left, right, arr);
     }
@@ -64,7 +64,7 @@ public class MergeSort {
     public static void main(String[] args) {
         MergeSort mergeSort = new MergeSort();
         int array []= {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        mergeSort.mergeSort(array);
+        mergeSort.sort(array);
         mergeSort.printArray(array);
     }
 

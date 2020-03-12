@@ -3,8 +3,8 @@ package sorting;
 /**
  * Created by Imran on 1/18/2020.
  */
-public class InsertionSort {
-    public void insertionSort(int arr[]){
+public class InsertionSort{
+    public static void sort(int arr[]){
         int len = arr.length;
         int value = 0;
         int hole = 0;
@@ -30,7 +30,7 @@ public class InsertionSort {
     public static void main(String[] args) {
         InsertionSort insertionSort = new InsertionSort();
         int array []= {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        insertionSort.insertionSort(array);
+        insertionSort.sort(array);
         insertionSort.printArray(array);
     }
 }
