@@ -15,25 +15,25 @@ public class TimeTest {
         Random random = new Random();
         int size = scan.nextInt();
         int[] arr = new int[size];
+        int[] tempArr = new int[size];
 
         for(int i=0;i<size;i++)
         {
             arr[i] = random.nextInt();
         }
 
+        tempArr = arr;
+
         long startTime = System.currentTimeMillis();
-        new BubbleSort().sort(arr);
+        new BubbleSort().sort(tempArr);
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println("Bubble Sort : " + elapsedTime);
 
-        for(int i=0;i<size;i++)
-        {
-            arr[i] = random.nextInt();
-        }
+        tempArr = arr;
 
         startTime = System.currentTimeMillis();
-        new InsertionSort().sort(arr);
+        new InsertionSort().sort(tempArr);
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
         System.out.println("Insertion Sort : " + elapsedTime);
@@ -49,24 +49,18 @@ public class TimeTest {
 //        elapsedTime = stopTime - startTime;
 //        System.out.println("Bucket  Sort : " + elapsedTime);
 
-        for(int i=0;i<size;i++)
-        {
-            arr[i] = random.nextInt();
-        }
+        tempArr = arr;
 
         startTime = System.currentTimeMillis();
-        new MergeSort().sort(arr);
+        new MergeSort().sort(tempArr);
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
         System.out.println("Merge Sort : " + elapsedTime);
 
-        for(int i=0;i<size;i++)
-        {
-            arr[i] = random.nextInt();
-        }
+        tempArr = arr;
 
         startTime = System.currentTimeMillis();
-        new SelectionSort().sort(arr);
+        new SelectionSort().sort(tempArr);
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
         System.out.println("Selection Sort : " + elapsedTime);
