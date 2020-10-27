@@ -9,6 +9,6 @@ public class TrieTest {
         trie.insert("sad");
         trie.insert("dog");
         trie.insert("day");
-        System.out.println(trie.search("do"));
+        System.out.println(trie.search("dog"));
     }
 }
