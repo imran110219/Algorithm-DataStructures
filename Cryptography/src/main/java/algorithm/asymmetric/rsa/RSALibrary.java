@@ -44,22 +44,23 @@ public class RSALibrary {
         fos2.close();
     }
 
-    public static String encrypt(String plainText, PrivateKey privatekey) throws Exception {
+    public static String encrypt(String plainText, PublicKey publickey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, privatekey);
+        cipher.init(Cipher.ENCRYPT_MODE, publickey);
         return Base64.getEncoder().encodeToString(cipher.doFinal(plainText.getBytes("UTF-8")));
     }
 
-    public static String decrypt(String cipherText, PublicKey publickey) throws Exception {
+    public static String decrypt(String cipherText, PrivateKey privatekey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, publickey);
-        return Base64.getEncoder().encodeToString(cipher.doFinal(cipherText.getBytes("UTF-8")));
+        cipher.init(Cipher.DECRYPT_MODE, privatekey);
+        return new String(cipher.doFinal(Base64.getDecoder().decode(cipherText)));
     }
 
     public static void main(String[] args) throws Exception {
         RSALibrary.generateKeys();
-        System.out.println(RSALibrary.encrypt("Secret",privateKey));
-        String cipher = RSALibrary.encrypt("Secret",privateKey);
-        System.out.println(RSALibrary.decrypt(cipher,publicKey));
+        System.out.println(publicKey);
+        String cipher = RSALibrary.encrypt("Secret",publicKey);
+        System.out.println(cipher);
+        System.out.println(RSALibrary.decrypt(cipher,privateKey));
     }
 }
