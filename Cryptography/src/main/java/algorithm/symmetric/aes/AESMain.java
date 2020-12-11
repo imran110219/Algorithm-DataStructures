@@ -1,15 +1,21 @@
 package algorithm.symmetric.aes;
 
+import java.util.Base64;
+
 /**
  * @author Sadman
  */
 public class AESMain {
-    public static void main(String[] args) {
-        final String secretKey = "ssshhhhhhhhhhh!!!!";
-
+    public static void main(String[] args) throws Exception {
+        final String secretKey = "ABCDEF";
         String originalString = "howtodoinjava.com";
-        String encryptedString = AESLibrary.encrypt(originalString, secretKey) ;
-        String decryptedString = AESLibrary.decrypt(encryptedString, secretKey) ;
+
+//        AESLibrary.generateKey();
+        AESLibrary.generateKey(secretKey);
+
+        String encryptedString = AESLibrary.encrypt(originalString) ;
+        String decryptedString = AESLibrary.decrypt(encryptedString) ;
+
 
         System.out.println(originalString);
         System.out.println(encryptedString);
