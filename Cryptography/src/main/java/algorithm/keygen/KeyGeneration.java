@@ -18,11 +18,6 @@ public class KeyGeneration {
     public static void main(String args[]) throws Exception{
 
         List<String> algorithms = Arrays.asList("DES", "AES", "DESede", "HmacSHA256", "HmacSHA1");
-        //AES (128)
-        //DES (56)
-        //DESede (168)
-        //HmacSHA1
-        //HmacSHA256
 
         List<Key> keys = new ArrayList<>();
 
