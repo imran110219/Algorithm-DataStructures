@@ -1,4 +1,4 @@
-package algorithm.keygen;
+package algorithm.key;
 
 import java.security.*;
 import java.security.spec.EncodedKeySpec;
@@ -7,8 +7,6 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 import com.sun.jersey.core.util.Base64;
-
-import javax.crypto.spec.SecretKeySpec;
 
 
 /**

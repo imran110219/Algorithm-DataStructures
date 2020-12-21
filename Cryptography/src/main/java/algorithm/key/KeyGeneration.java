@@ -1,11 +1,10 @@
-package algorithm.keygen;
+package algorithm.key;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 
 import java.security.Key;
 import java.security.SecureRandom;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
