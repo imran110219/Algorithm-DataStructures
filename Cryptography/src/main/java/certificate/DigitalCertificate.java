@@ -20,7 +20,7 @@ import java.util.*;
  */
 public class DigitalCertificate {
 
-    private static final int keysize = 1024;
+    private static final int keysize = 128;
     private static final String commonName = "www.test.de";
     private static final String organizationalUnit = "IT";
     private static final String organization = "test";
@@ -30,6 +30,13 @@ public class DigitalCertificate {
     private static final long validity = 1096; // 3 years
     private static final String alias = "tomcat";
     private static final char[] keyPass = "123456".toCharArray();
+
+    public static CertAndKeyGen generateCertAndKeyGen() throws Exception {
+        KeyStore keyStore = KeyStore.getInstance("JKS");
+        keyStore.load(null, null);
+        CertAndKeyGen keypair = new CertAndKeyGen("RSA", "SHA1WithRSA", null);
+        return keypair;
+    }
 
     public static X509Certificate generateSunCertificate() throws Exception {
         KeyStore keyStore = KeyStore.getInstance("JKS");
@@ -101,18 +108,17 @@ public class DigitalCertificate {
         return new String(cipher.doFinal(Base64.getDecoder().decode(message)));
     }
 
-    public static String sign(String signatureAlgorithm, PrivateKey privateKey, String message) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, UnsupportedEncodingException {
+    public static byte[] sign(String signatureAlgorithm, PrivateKey privateKey, String message) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, UnsupportedEncodingException {
         Signature signature = Signature.getInstance(signatureAlgorithm);
         signature.initSign(privateKey);
-        signature.update(Base64.getDecoder().decode(message));
-        return new String(signature.sign(),"UTF8");
+        signature.update(message.getBytes());
+        return signature.sign();
     }
 
-    public static boolean verify(String signatureAlgorithm, X509Certificate cert, String message, String signedMessage) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, UnsupportedEncodingException {
+    public static boolean verify(String signatureAlgorithm, X509Certificate cert, String message, byte[] signedMessage) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, UnsupportedEncodingException {
         Signature signature = Signature.getInstance(signatureAlgorithm);
         signature.initVerify(cert);
-        signature.update(message.getBytes("UTF-8"));
-
-        return signature.verify(signedMessage.getBytes("UTF-8"));
+        signature.update(message.getBytes());
+        return signature.verify(signedMessage);
     }
 }
