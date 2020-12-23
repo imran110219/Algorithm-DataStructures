@@ -41,6 +41,7 @@ public class CertificateMain {
         keypair.generate(512);
         X509Certificate certificate =  keypair.getSelfCertificate(x500Name, new Date(), 365 * 24 * 60 * 60);
         PrivateKey privateKey = keypair.getPrivateKey();
+
         String encrypted = DigitalCertificate.encrypt(certificate, "Test");
         System.out.println(encrypted);
         System.out.println(DigitalCertificate.decrypt(privateKey, encrypted));
