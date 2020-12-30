@@ -1,48 +1,41 @@
 package algorithm.symmetric.aes;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptDecryptFileExample {
     public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException, IOException {
-        var key = "jackrutorial.com";
+        String key = "jackrutorial.com";
 
-        System.out.println("File input: " + "D:\\text.txt");
+        System.out.println("File input: " + "text.txt");
 
         //encryptedFile
-        encryptedFile(key, "D:\\text.txt", "D:\\text.enc");
+        encryptedFile(key, "text.txt", "text.enc");
 
         //decryptedFile
-        decryptedFile(key, "D:\\text.enc", "D:\\text-decrypt.txt");
+        decryptedFile(key, "text.enc", "text-decrypt.txt");
     }
 
     public static void encryptedFile(String secretKey, String fileInputPath, String fileOutPath)
-            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException,
-            IllegalBlockSizeException, BadPaddingException {
-        var key = new SecretKeySpec(secretKey.getBytes(), "AES");
-        var cipher = Cipher.getInstance("AES");
+            throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
+        SecretKey key = new SecretKeySpec(secretKey.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, key);
 
-        var fileInput = new File(fileInputPath);
-        var inputStream = new FileInputStream(fileInput);
-        var inputBytes = new byte[(int) fileInput.length()];
+        File fileInput = new File(fileInputPath);
+        FileInputStream inputStream = new FileInputStream(fileInput);
+        byte[] inputBytes = new byte[(int) fileInput.length()];
         inputStream.read(inputBytes);
 
-        var outputBytes = cipher.doFinal(inputBytes);
+        byte[] outputBytes = cipher.doFinal(inputBytes);
 
-        var fileEncryptOut = new File(fileOutPath);
-        var outputStream = new FileOutputStream(fileEncryptOut);
+        File fileEncryptOut = new File(fileOutPath);
+        FileOutputStream outputStream = new FileOutputStream(fileEncryptOut);
         outputStream.write(outputBytes);
 
         inputStream.close();
@@ -55,19 +48,19 @@ public class EncryptDecryptFileExample {
     public static void decryptedFile(String secretKey, String fileInputPath, String fileOutPath)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException,
             IllegalBlockSizeException, BadPaddingException {
-        var key = new SecretKeySpec(secretKey.getBytes(), "AES");
-        var cipher = Cipher.getInstance("AES");
+        SecretKey key = new SecretKeySpec(secretKey.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, key);
 
-        var fileInput = new File(fileInputPath);
-        var inputStream = new FileInputStream(fileInput);
-        var inputBytes = new byte[(int) fileInput.length()];
+        File fileInput = new File(fileInputPath);
+        FileInputStream inputStream = new FileInputStream(fileInput);
+        byte[] inputBytes = new byte[(int) fileInput.length()];
         inputStream.read(inputBytes);
 
         byte[] outputBytes = cipher.doFinal(inputBytes);
 
-        var fileEncryptOut = new File(fileOutPath);
-        var outputStream = new FileOutputStream(fileEncryptOut);
+        File fileEncryptOut = new File(fileOutPath);
+        FileOutputStream outputStream = new FileOutputStream(fileEncryptOut);
         outputStream.write(outputBytes);
 
         inputStream.close();
@@ -77,4 +70,4 @@ public class EncryptDecryptFileExample {
         System.out.println("New File: " + fileOutPath);
     }
 }
-}
+
