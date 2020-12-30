@@ -1,15 +1,13 @@
 package certificate.keystore;
 
+import sun.security.x509.X500Name;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.UnrecoverableEntryException;
+import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
@@ -71,6 +69,10 @@ public class JavaKeyStore {
 
     Certificate getCertificate(String alias) throws KeyStoreException {
         return keyStore.getCertificate(alias);
+    }
+
+    Key getKey(String alias, String keyPassword) throws UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException {
+        return keyStore.getKey(alias, keyPassword.toCharArray());
     }
 
     void deleteEntry(String alias) throws KeyStoreException {
