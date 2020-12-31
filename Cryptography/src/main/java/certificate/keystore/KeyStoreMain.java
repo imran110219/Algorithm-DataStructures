@@ -19,7 +19,10 @@ import java.util.List;
  */
 public class KeyStoreMain {
     public static void main(String[] args) throws Exception {
-        JavaKeyStore javaKeyStore = new JavaKeyStore("PKCS12","123456", "JavaKeyStore.jks");
+//        JKS, JCEKS, PKCS12, PKCS11 and DKS
+        String[] keyStoreTypes = {"JKS", "JCEKS", "PKCS12", "PKCS11", "DKS", "BKS"};
+
+        JavaKeyStore javaKeyStore = new JavaKeyStore(keyStoreTypes[1],"123456", "DemoJCEKS.jks");
         javaKeyStore.createEmptyKeyStore();
 //        System.out.println(javaKeyStore.getKeyStore());
 
