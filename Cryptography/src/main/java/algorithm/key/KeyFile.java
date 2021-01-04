@@ -53,15 +53,15 @@ public class KeyFile {
     }
 
     public static void main(String[] args) throws Exception {
-//        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("AES");
-//        keyGen.initialize(512);
-//        KeyPair keyPair = keyGen.genKeyPair();
-//        PrivateKey privateKey = keyPair.getPrivate();
-//        PublicKey publicKey = keyPair.getPublic();
-        SecretKey secretKey = KeyGenerator.getInstance("AES").generateKey();
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("AES");
+        keyGen.initialize(512);
+        KeyPair keyPair = keyGen.genKeyPair();
+        PrivateKey privateKey = keyPair.getPrivate();
+        PublicKey publicKey = keyPair.getPublic();
+//        SecretKey secretKey = KeyGenerator.getInstance("AES").generateKey();
 
         try(JcaPEMWriter pemWriter = new JcaPEMWriter(new FileWriter("public.pem"))) {
-            pemWriter.writeObject((PemObject)secretKey);
+            pemWriter.writeObject(privateKey);
         }
 
         PublicKey newpublicKey = KeyFile.get("public.pem");

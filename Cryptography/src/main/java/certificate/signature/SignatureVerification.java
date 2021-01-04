@@ -1,10 +1,13 @@
 package certificate.signature;
 
+import java.lang.reflect.Array;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.Signature;
 
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Scanner;
 /**
  * @author Sadman
@@ -29,6 +32,7 @@ public class SignatureVerification {
         //Initializing the signature
         sign.initSign(privKey);
         byte[] bytes = "Hello how are you".getBytes();
+        byte[] bytes1 = "Hello how are you?".getBytes();
 
         //Adding data to the signature
         sign.update(bytes);
@@ -36,9 +40,17 @@ public class SignatureVerification {
         //Calculating the signature
         byte[] signature = sign.sign();
 
+        String signString = Base64.getEncoder().encodeToString(signature);
+
+        byte[] signature1 = Base64.getDecoder().decode(signString);
+
+        System.out.println(signature);
+        System.out.println(signature1);
+        System.out.println(Arrays.equals(signature,signature1));
+
         //Initializing the signature
         sign.initVerify(pair.getPublic());
-        sign.update(bytes);
+        sign.update(bytes1);
 
         //Verifying the signature
         boolean bool = sign.verify(signature);
