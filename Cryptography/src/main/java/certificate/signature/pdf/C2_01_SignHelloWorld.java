@@ -1,7 +1,9 @@
 package certificate.signature.pdf;
 
+import certificate.DigitalCertificate;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.StampingProperties;
 import com.itextpdf.signatures.BouncyCastleDigest;
 import com.itextpdf.signatures.DigestAlgorithms;
 import com.itextpdf.signatures.IExternalDigest;
@@ -26,22 +28,22 @@ public class C2_01_SignHelloWorld {
     public static final String DEST = "E:/Digidoc/";
 
     public static final String KEYSTORE = "E:/Digidoc/JavaKeyStore.jks";
-    public static final String SRC = "E:/Digidoc/design_principles.pdf";
+    public static final String SRC = "E:/Digidoc/Engineering Front-End Web Apps with Plain Javascript.pdf";
 
     public static final char[] PASSWORD = "123456".toCharArray();
 
     public static final String[] RESULT_FILES = new String[] {
-            "hello_signed1.pdf",
-            "hello_signed2.pdf",
-            "hello_signed3.pdf",
-            "hello_signed4.pdf"
+            "signed1.pdf",
+            "signed2.pdf",
+            "signed3.pdf",
+            "signed4.pdf"
     };
 
     public void sign(String src, String dest, Certificate[] chain, PrivateKey pk, String digestAlgorithm,
                      String provider, PdfSigner.CryptoStandard signatureType, String reason, String location)
             throws GeneralSecurityException, IOException {
         PdfReader reader = new PdfReader(src);
-        PdfSigner signer = new PdfSigner(reader, new FileOutputStream(dest),true);
+        PdfSigner signer = new PdfSigner(reader, new FileOutputStream(dest), true);
 
         // Create the signature appearance
         Rectangle rect = new Rectangle(36, 648, 200, 100);

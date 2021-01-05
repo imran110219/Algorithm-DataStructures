@@ -32,18 +32,18 @@ public class CertificateMain {
 
 //        Certificate certificate = DigitalCertificate.getCertificateFromKeystore(loc, password).get(0);
 //        PrivateKey privateKey = DigitalCertificate.getPrivateKeyFromKeystore(loc, password).get(0);
-        CertAndKeyGen keypair = DigitalCertificate.generateCertAndKeyGen();
-        X500Name x500Name = new X500Name("Sadman Sobhan", "Engineering", "Cipher Text", "Dhaka", "Dhaka", "BD");
-        keypair.generate(512);
-        X509Certificate certificate =  keypair.getSelfCertificate(x500Name, new Date(), 365 * 24 * 60 * 60);
-        PrivateKey privateKey = keypair.getPrivateKey();
-
-        String encrypted = DigitalCertificate.encrypt(certificate, "Test");
-        System.out.println(encrypted);
-        System.out.println(DigitalCertificate.decrypt(privateKey, encrypted));
-
-        byte[] signedMessage = DigitalCertificate.sign("SHA256withRSA",privateKey,"Test");
-        System.out.println(signedMessage);
-        System.out.println(DigitalCertificate.verify("SHA256withRSA", certificate, "Test", signedMessage));
+//        CertAndKeyGen keypair = DigitalCertificate.generateCertAndKeyGen();
+//        X500Name x500Name = new X500Name("Sadman Sobhan", "Engineering", "Cipher Text", "Dhaka", "Dhaka", "BD");
+//        keypair.generate(512);
+//        X509Certificate certificate =  keypair.getSelfCertificate(x500Name, new Date(), 365 * 24 * 60 * 60);
+//        PrivateKey privateKey = keypair.getPrivateKey();
+//
+//        String encrypted = DigitalCertificate.encrypt(certificate, "Test");
+//        System.out.println(encrypted);
+//        System.out.println(DigitalCertificate.decrypt(privateKey, encrypted));
+//
+//        byte[] signedMessage = DigitalCertificate.sign("SHA256withRSA",privateKey,"Test");
+//        System.out.println(signedMessage);
+//        System.out.println(DigitalCertificate.verify("SHA256withRSA", certificate, "Test", signedMessage));
     }
 }

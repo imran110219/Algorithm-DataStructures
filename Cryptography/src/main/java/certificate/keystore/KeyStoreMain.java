@@ -38,26 +38,26 @@ public class KeyStoreMain {
 //        System.out.println(javaKeyStore.getEntry("privateKey"));
 //        System.out.println(javaKeyStore.getCertificate("certificate"));
 
-        CertAndKeyGen keypair1 = DigitalCertificate.generateCertAndKeyGen();
-        X500Name x500Name1 = new X500Name("Md Amin", "Developer", "Dohatec", "Juraine", "Juraine", "US");
-        keypair1.generate(512);
-        X509Certificate certificate1 =  keypair1.getSelfCertificate(x500Name1, new Date(), 365 * 24 * 60 * 60);
-        PrivateKey privateKey1 = keypair1.getPrivateKey();
+//        CertAndKeyGen keypair1 = DigitalCertificate.generateCertAndKeyGen();
+//        X500Name x500Name1 = new X500Name("Md Amin", "Developer", "Dohatec", "Juraine", "Juraine", "US");
+//        keypair1.generate(512);
+//        X509Certificate certificate1 =  keypair1.getSelfCertificate(x500Name1, new Date(), 365 * 24 * 60 * 60);
+//        PrivateKey privateKey1 = keypair1.getPrivateKey();
 
 //        javaKeyStore.setCertificateEntry("certificate1",certificate1);
-        javaKeyStore.setKeyEntry("privateKey1",privateKey1,"123456", new Certificate[]{certificate1});
-
-        System.out.println(javaKeyStore.getCertificate("privateKey1"));
-        X509Certificate cer = (X509Certificate)javaKeyStore.getCertificate("privateKey1");
-        PrivateKey key = (PrivateKey)javaKeyStore.getKey("privateKey1","123456");
-
-        String enc = DigitalCertificate.encrypt(cer,"Test");
-        System.out.println(enc);
-        String plain = DigitalCertificate.decrypt(key,enc);
-        System.out.println(plain);
-
-
-        List<Certificate> list = javaKeyStore.getCertificateList();
-        System.out.println(list.size());
+//        javaKeyStore.setKeyEntry("privateKey1",privateKey1,"123456", new Certificate[]{certificate1});
+//
+//        System.out.println(javaKeyStore.getCertificate("privateKey1"));
+//        X509Certificate cer = (X509Certificate)javaKeyStore.getCertificate("privateKey1");
+//        PrivateKey key = (PrivateKey)javaKeyStore.getKey("privateKey1","123456");
+//
+//        String enc = DigitalCertificate.encrypt(cer,"Test");
+//        System.out.println(enc);
+//        String plain = DigitalCertificate.decrypt(key,enc);
+//        System.out.println(plain);
+//
+//
+//        List<Certificate> list = javaKeyStore.getCertificateList();
+//        System.out.println(list.size());
     }
 }
