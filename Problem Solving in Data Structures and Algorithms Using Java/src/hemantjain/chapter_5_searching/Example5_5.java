@@ -2,7 +2,7 @@ package hemantjain.chapter_5_searching;
 
 /*
 Time Complexity: O(n^2).
-Space Complexity: O(1) For system stack in recursion
+Space Complexity: O(1)
 */
 
 public class Example5_5 {

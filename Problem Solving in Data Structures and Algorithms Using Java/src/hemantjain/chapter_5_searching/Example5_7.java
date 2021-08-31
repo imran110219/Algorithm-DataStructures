@@ -2,7 +2,7 @@ package hemantjain.chapter_5_searching;
 
 /*
 Time Complexity: O(n).
-Space Complexity: O(n) For system stack in recursion
+Space Complexity: O(n)
 */
 
 import java.util.HashSet;
