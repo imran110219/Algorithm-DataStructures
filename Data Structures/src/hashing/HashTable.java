@@ -14,31 +14,29 @@ public class HashTable {
         return key.hashCode() % INITIAL_SIZE;
     }
 
-    void insert(String s)
-    {
+    void insert(String s) {
         int index = getHash(s);
         HashNode hashNode = new HashNode(s);
-        if(hashTable[index] == null)
+        if (hashTable[index] == null)
             hashTable[index] = hashNode;
-        else{
+        else {
             HashNode temp = hashTable[index];
-            while(temp.next != null) {
+            while (temp.next != null) {
                 temp = temp.next;
             }
             temp.next = hashNode;
         }
     }
 
-    String search(String s)
-    {
+    String search(String s) {
         int index = getHash(s);
-        if(hashTable[index] != null) {
+        if (hashTable[index] != null) {
             HashNode temp = hashTable[index];
 
             // Check the entry linked list for march
             // for the given 'key'
-            while( !temp.equals(s)
-                    && temp.next != null ) {
+            while (!temp.equals(s)
+                    && temp.next != null) {
                 temp = temp.next;
             }
             return temp.value;
@@ -46,14 +44,28 @@ public class HashTable {
         return null;
     }
 
-    public static void main(String[] args){
+    void delete(String s) {
+        int index = getHash(s);
+        if (hashTable[index] != null) {
+            HashNode temp = hashTable[index];
+
+            // Check the entry linked list for march
+            // for the given 'key'
+            while (!temp.equals(s)
+                    && temp.next != null) {
+                temp = temp.next;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
         HashTable hashTables = new HashTable();
         // Put some key values.
-        for(int i=0; i<30; i++) {
+        for (int i = 0; i < 30; i++) {
             final String key = String.valueOf(i);
             hashTables.insert(key);
         }
-        for(int i=0; i<30; i++) {
+        for (int i = 0; i < 30; i++) {
             System.out.println(hashTables.hashTable[i].value);
         }
     }
