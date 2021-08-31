@@ -4,7 +4,6 @@ package hemantjain.chapter_5_searching;
 The Time Complexity of an algorithm is O(n) and Space Complexity is O(1)
 */
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class Example5_19 {
