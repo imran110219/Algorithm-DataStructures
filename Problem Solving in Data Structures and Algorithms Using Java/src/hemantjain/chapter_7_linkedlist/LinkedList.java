@@ -1,4 +1,4 @@
-package hemantjain.chapter_6_sorting;
+package hemantjain.chapter_7_linkedlist;
 
 /**
  * @author Sadman
@@ -223,6 +223,64 @@ public class LinkedList {
             curr = curr.next;
         }
         return curr.value;
+    }
+
+    public int nthNodeFromEnd(int index) {
+        int size = findLength();
+        int startIndex;
+        if (size != 0 && size < index) {
+            return Integer.MAX_VALUE;
+        }
+        startIndex = size - index + 1;
+        return nthNodeFromBegining(startIndex);
+    }
+
+    public int nthNodeFromEnd2(int index) {
+        int count = 1;
+        Node forward = head;
+        Node curr = head;
+        while (forward != null && count <= index) {
+            count++;
+            forward = forward.next;
+        }
+        if
+        (forward == null)
+            return Integer.MAX_VALUE;
+        while (forward != null) {
+            forward = forward.next;
+            curr = curr.next;
+        }
+        return curr.value;
+    }
+
+    public boolean loopDetect() {
+        Node slowPtr;
+        Node fastPtr;
+        slowPtr = fastPtr = head;
+        while (fastPtr.next != null && fastPtr.next.next != null) {
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+            if (slowPtr == fastPtr) {
+                System.out.println("loop found");
+                return true;
+            }
+        }
+        System.out.println("loop not found");
+        return false;
+    }
+
+    public boolean reverseListLoopDetect() {
+        Node tempHead = head;
+        reverse();
+        if (tempHead == head) {
+            reverse();
+            System.out.println("loop found");
+            return true;
+        } else {
+            reverse();
+            System.out.println("loop not found");
+            return false;
+        }
     }
 
     public static void main(String[] args) {

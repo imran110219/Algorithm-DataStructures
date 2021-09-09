@@ -1,4 +1,4 @@
-package hemantjain.chapter_6_sorting;
+package hemantjain.chapter_7_linkedlist;
 
 /**
  * @author Sadman
