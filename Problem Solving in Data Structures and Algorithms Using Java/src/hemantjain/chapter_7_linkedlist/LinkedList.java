@@ -283,6 +283,26 @@ public class LinkedList {
         }
     }
 
+    public int loopTypeDetect() {
+        Node slowPtr;
+        Node fastPtr;
+        slowPtr = fastPtr = head;
+        while (fastPtr.next != null && fastPtr.next.next != null) {
+            if (head == fastPtr.next || head == fastPtr.next.next) {
+                System.out.println("circular list loop found");
+                return 2;
+            }
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+            if (slowPtr == fastPtr) {
+                System.out.println("loop found");
+                return 1;
+            }
+        }
+        System.out.println("loop not found");
+        return 0;
+    }
+
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
         ll.addHead(1);
